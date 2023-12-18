@@ -1,0 +1,59 @@
+﻿@model IEnumerable<QLBanhang.Models.HoaDon>
+
+@{
+    ViewBag.Title = "Hoá Đơn Bán Hàng";
+}
+
+<h2>Danh Mục Hoá Đơn</h2>
+
+<p>
+    @Html.ActionLink("Thêm Hoá Đơn", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Mã Hoá Đơn
+        </th>
+        <th>
+            Ngày Lập Hoá Đơn
+        </th>
+        <th>
+           Ngày Giao Hàng
+        </th>
+        <th>
+            Tên Khách Hàng
+        </th>
+        <th>
+            Nhân viên Bán Hàng
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            <a href="@Url.Action("Index", "CTHDs", new {MaHD = item.MaHD})">
+                @Html.DisplayFor(modelItem => item.MaHD)
+            </a>
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NgayLapHD)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NgayGiaoHang)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.KhachHang.TenKH)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Nhanvien.HoNV)
+            @Html.DisplayFor(modelItem => item.Nhanvien.Ten)
+        </td>
+        <td>
+            @Html.ActionLink("Sửa", "Edit", new { id=item.MaHD }) |
+            @Html.ActionLink("Xem Chi Tiết", "Details", new { id=item.MaHD }) |
+            @Html.ActionLink("Xoá", "Delete", new { id=item.MaHD })
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,70 @@
+﻿html, body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.slider-container {
+    height: 100%;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+}
+
+.menu {
+    position: absolute;
+    left: 0;
+    z-index: 900;
+    width: 100%;
+    bottom: 0;
+}
+
+    .menu label {
+        cursor: pointer;
+        display: inline-block;
+        width: 16px;
+        height: 16px;
+        background: #fff;
+        border-radius: 50px;
+        margin: 0 .2em 1em;
+        transition: all .3s ease;
+        &:hover
+
+{
+    background: red;
+}
+
+}
+
+.slide {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 100%;
+    z-index: 10;
+    padding: 8em 1em 0;
+    background-size: cover;
+    background-position: 50% 50%;
+    transition: left 0s .75s;
+}
+
+[id^="slide"]:checked + .slide {
+    left: 0;
+    z-index: 100;
+    transition: left .65s ease-out;
+}
+
+.slide-1 {
+    background-image: url("https://cdn.tgdd.vn/Files/2021/11/15/1397989/vi-sao-banh-pizza-hinh-tron-nhung-lai-dung-trong-hop-hinh-vuong-202111150646220702.jpg");
+}
+
+.slide-2 {
+    background-image: url("https://i.bloganchoi.com/bloganchoi.com/wp-content/uploads/2016/06/goi-nho-696x392.jpg?fit=700%2C20000&quality=95&ssl=1");
+}
+
+.slide-3 {
+    background-image: url("https://western.edu.vn/wp-content/uploads/2017/04/pizza-800x480.jpg");
+}

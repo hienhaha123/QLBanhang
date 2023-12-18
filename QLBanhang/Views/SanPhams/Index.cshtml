@@ -1,0 +1,87 @@
+﻿@model PagedList.IPagedList<QLBanhang.Models.SanPham>
+@using QLBanhang.Models;
+@using PagedList.Mvc;
+<link rel="stylesheet" href="~/Content/PagedList.css" />
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Danh Mục Món ăn</h2>
+
+<p>
+    @Html.ActionLink("Thêm Sản Phẩm","Create")
+</p>
+<div class="carousel">
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Mã Sản Phẩm</th>
+                <th scope="col">
+                    @Html.ActionLink("Tên Sản Phẩm", "Index", new {sortOrder = ViewBag.SortByName})
+                </th>
+                <th scope="col">
+                    Đơn Vị Tính
+                </th>
+                <th scope="col">
+                    @Html.ActionLink("Đơn Giá", "Index", new { sortOrder = ViewBag.SortByName })
+                </th>
+                <th scope="col">
+                    Loại Sản Phẩm
+                </th>
+
+                <th scope="col">
+                    Hình
+                </th>
+
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MaSP)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.TenSP)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Donvitinh)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Dongia)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.LoaiSP.TenLoaiSP)
+                </td>
+
+                <td>
+                    @*Html.DisplayFor(modelItem => item.HinhSP)*@
+                    @Html.Image("../" + item.HinhSP, "", "50")
+                </td>
+
+                <td>
+                    @Html.ActionLink("SỬA", "Edit", new { id = item.MaSP }) |
+                    @Html.ActionLink("XOÁ", "Delete", new { id = item.MaSP })
+                </td>
+            </tr>
+            }
+        </tbody>
+
+    </table>
+</div>
+<div>
+    Trang @(Model.PageCount<Model.PageNumber?0:Model.PageNumber)/@Model.PageCount
+    @Html.PagedListPager(Model, page => Url.Action("Index",
+    new
+    {
+        page,
+        sortOrder = ViewBag.CurrentSort
+    }))
+</div>

@@ -1,0 +1,51 @@
+﻿@model QLBanhang.Models.RegisterViewModel
+@{
+    ViewBag.Title = "Tạo Tài Khoản";
+}
+<link rel="stylesheet" type="text/css" href="~/Content/Dangky.css">
+
+<h2>@ViewBag.Title.</h2>
+
+@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+
+    <hr />
+    <form>
+        <div class="container">
+            <p>Vui lòng điền thông tin.</p>
+            <h1>Đăng Ký</h1>
+            @Html.ValidationSummary("", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
+                <div class="col-md-10">
+                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
+                <div class="col-md-10">
+                    @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 control-label" })
+                <div class="col-md-10">
+                    @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
+                </div>
+            </div>
+            <hr>
+            <p>Bằng cách tạo tài khoản, bạn đồng ý với <a href="#"> Điều khoản & Quyền riêng tư</a> của chúng tui.</p>
+
+            <button type="submit" class="registerbtn">Đăng Ký</button>
+            <div class="container signin">
+                <p>Bạn có muốn đăng nhập? <a @Html.ActionLink("Đăng Nhập", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })></a></p>
+
+            </div>
+        </div>
+    </form>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,0 +1,54 @@
+﻿@model IEnumerable<QLBanhang.Models.CTHD>
+
+@{
+    ViewBag.Title = "Chi Tiết Hoá Đơn";
+}
+
+<h2>Chi Tiết Hoá Đơn</h2>
+
+
+@foreach (var m in ViewBag.Main) 
+{
+    <h3>Số Hoá Đơn: @m.hoadon.MaHD</h3>
+    <h3>Tên Khách Hàng: @m.khachhang.TenKH</h3>
+}
+<table class="table table-striped">
+    <tr>
+        <th>Số TT</th>
+        <th>Tên SP </th>
+        <th>Đơn Vị Tính</th>
+        <th>Số lượng</th>
+        <th>Đơn Giá</th>
+        <th>Thành Tiền</th>
+    </tr>
+    @{ 
+        double tongtien = 0;
+        int i = 0;
+    }
+    @foreach(var item in ViewBag.Sub)
+    {
+        i++;
+        tongtien += (Convert.ToDouble(@item.cthd.Soluong) * Convert.ToDouble(@item.cthd.DongiaBan));
+        
+        <tr>
+            <td>@i</td>
+            <td>@item.sanpham.TenSP</td>
+            <td>@item.sanpham.Donvitinh</td>
+            <td>@item.cthd.Soluong</td>
+            <td>@String.Format("{0:0,##0}",item.cthd.DongiaBan)</td>
+            <td>@String.Format("{0:0,##0}", item.Thanhtien)</td>
+        </tr>
+  
+    }
+    <tr>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th>Tổng Tiền:</th>
+        <th><text>@String.Format("{0:0,###0}", tongtien)</text></th>
+    </tr>
+
+</table>
+
+
